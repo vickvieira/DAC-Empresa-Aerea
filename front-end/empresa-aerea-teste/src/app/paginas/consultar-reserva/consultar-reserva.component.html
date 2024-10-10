@@ -9,6 +9,21 @@
   
     <button class="btn btn-primary" (click)="buscarReserva()">Buscar Reserva</button>
     
+
+    <div *@If="reserva">
+      <h3>Detalhes da Reserva</h3>
+      <p>Data/Hora: {{reserva.dataHora}}</p>
+      <p>Código da Reserva: {{reserva.codigo}}</p>
+      <p>Origem: {{reserva.origem}}</p>
+      <p>Destino: {{reserva.destino}}</p>
+      <p>Valor Gasto: R$ {{reserva.valorGasto}}</p>
+      <p>Milhas Gastas: {{reserva.milhasGastas}}</p>
+      <p>Estado: {{reserva.estado}}</p>
+      
+      
+      <button *@If="reserva.proximas48h" class="btn btn-success">Fazer Check-in</button>
+      <button class="btn btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>
+    </div>
   
   </div>
   
