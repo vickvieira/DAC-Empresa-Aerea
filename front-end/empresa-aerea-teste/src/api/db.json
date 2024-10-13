@@ -1,4 +1,4 @@
-{  
+{
   "usuarios": [],
   "clientes": [
     {
@@ -54,6 +54,22 @@
       "valorGasto": 750.20,
       "milhasUtilizadas": 2500,
       "status": "Voo realizado"
+    },
+    {
+      "codigo": "RES9999",
+      "dataHoraReserva": "2024-10-13T21:00:00",
+      "clienteId": 1,
+      "voo": {
+        "codigo": "XXX1234",
+        "dataHora": "2024-09-15T14:00:00",
+        "origem": "CWB",
+        "destino": "BSB",
+        "valorPassagem": 2070.00,
+        "milhasNecessarias": 2000
+      },
+      "valorGasto": 2070.00,
+      "milhasUtilizadas": 2000,
+      "status": "Reserva cancelada"
     }
   ]
 }

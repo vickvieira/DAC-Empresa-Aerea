@@ -48,6 +48,14 @@ export class HomeClienteComponent implements OnInit {
       if (this.cliente) { //verifica se o id do cliente foi capturado corretamente
         console.log('Cliente ID:', this.cliente);
         this.reservasFiltradas = this.reservas.filter(reserva => reserva.clienteId === this.clienteId);
+
+
+        // Ordena as reservas filtradas por data e hora
+        this.reservasFiltradas.sort((a, b) => {
+          const dateA = new Date(a.voo.dataHora).getTime();
+          const dateB = new Date(b.voo.dataHora).getTime();
+          return dateA - dateB; // Para ordem crescente
+        });
       } else {
         this.reservasFiltradas = []; // Se não houver clienteId, define como array vazio
         console.error('Cliente ID não encontrado na rota');
@@ -76,7 +84,7 @@ export class HomeClienteComponent implements OnInit {
   }
 
   cancelarReserva(): void {
-    this.mensagemAlerta = "OPERAÇÃO NÃO IMPLEMENTADA";
+    this.mensagemAlerta = "OPERAÇÃO NÃO IMPLEMENTADA (R08)";
     //NO TS: função cancelarReserva(codigo: string): void
     //NO HTML(Botão sim do modal de confirmação de cancelamento): (click) = "cancelarReserva(reserva.codigo) "
     //this.reservaService.cancelarReserva(codigo).subscribe(() => {

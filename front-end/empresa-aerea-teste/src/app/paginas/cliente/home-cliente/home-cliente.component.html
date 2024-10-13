@@ -26,15 +26,15 @@
       <tr *ngIf="expandedReserva === reserva">
         <td colspan="5" class="p-3">
           <div>
-            <strong>Valor Gasto:</strong> {{ reserva.valorGasto | currency }}<br>
-            <strong>Milhas Utilizadas:</strong> {{ reserva.milhasUtilizadas }}<br>
-            <strong>Status:</strong> {{ reserva }}
+            <strong>Valor Gasto:</strong> {{ reserva.valorGasto | currency:'BRL':'symbol':'1.2-2' }}<br>
+            <strong>Milhas Gastas:</strong> {{ reserva.milhasUtilizadas }} pontos<br>
+            <strong>Status:</strong> {{ reserva.status }}
           </div>
         </td>
       </tr>
 
       <td> <a class="link-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-          *ngIf="reserva.status !== 'Voo cancelado'">
+          *ngIf="reserva.status !== 'Voo cancelado'&& reserva.status !== 'Reserva cancelada'">
           <i class="bi bi-trash3"></i> Cancelar reserva
         </a>
       </td>
