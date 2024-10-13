@@ -3,6 +3,7 @@
   <p>Saldo atual de milhas: {{ milhasSaldo }} pontos</p>
 
   <h2>Voos e Reservas</h2>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,17 +19,48 @@
         <td>{{ reserva.voo.dataHora | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ reserva.voo.origem }}</td>
         <td>{{ reserva.voo.destino }}</td>
-        <td> <a class="link-primary" (click)="toggleVisualizar(reserva)"><i class="bi bi-eye"></i> Ver
-            reserva</a>
-        <td *ngIf="expandedReserva === reserva" colspan="5" class="p-3">
+        <td>
+          <a class="link-primary" (click)="toggleVisualizar(reserva)">
+            <i class="bi bi-eye"></i> Ver reserva
+          </a>
+      <tr *ngIf="expandedReserva === reserva">
+        <td colspan="5" class="p-3">
           <div>
             <strong>Valor Gasto:</strong> {{ reserva.valorGasto | currency }}<br>
             <strong>Milhas Utilizadas:</strong> {{ reserva.milhasUtilizadas }}<br>
-            <strong>Status:</strong> {{ reserva.status }}
+            <strong>Status:</strong> {{ reserva }}
           </div>
         </td>
-        <td> <a class="link-danger" (click)="cancelarReserva(reserva.codigo)"
-            *ngIf="reserva.status !== 'Voo cancelado'"><i class="bi bi-x-circle"></i> Cancelar reserva</a></td>
       </tr>
+
+      <td> <a class="link-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+          *ngIf="reserva.status !== 'Voo cancelado'">
+          <i class="bi bi-trash3"></i> Cancelar reserva
+        </a>
+      </td>
     </tbody>
   </table>
+</div>
+
+<!-- Modal Cancelar reserva-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmação de cancelamento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert" *ngIf="mensagemAlerta">
+          {{ mensagemAlerta }}
+        </div>
+        Tem certeza que deseja cancelar a reserva selecionada?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="cancelarReserva()">Sim</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+      </div>
+    </div>
+  </div>
+</div>

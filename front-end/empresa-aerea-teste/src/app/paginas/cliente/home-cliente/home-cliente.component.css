@@ -7,7 +7,6 @@
 
 button {
     padding: 5px 10px;
-    background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
@@ -15,4 +14,10 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.link-primary,
+.link-danger {
+    text-decoration: none;
+    cursor: pointer;
 }

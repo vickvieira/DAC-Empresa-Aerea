@@ -24,6 +24,7 @@ export class HomeClienteComponent implements OnInit {
   clienteId: number | undefined;
   expandedReserva: Reserva | null = null;
   reserva: any;
+  mensagemAlerta: string | null = null; // Variável para a mensagem de alerta
 
   constructor(
     private clienteService: ClienteService,
@@ -74,17 +75,20 @@ export class HomeClienteComponent implements OnInit {
     });
   }
 
-  cancelarReserva(codigo: string): void {
-    this.reservaService.cancelarReserva(codigo).subscribe(() => {
-      this.reservas = this.reservas.filter(reserva => reserva.codigo !== codigo);
-    });
+  cancelarReserva(): void {
+    this.mensagemAlerta = "OPERAÇÃO NÃO IMPLEMENTADA";
+    //NO TS: função cancelarReserva(codigo: string): void
+    //NO HTML(Botão sim do modal de confirmação de cancelamento): (click) = "cancelarReserva(reserva.codigo) "
+    //this.reservaService.cancelarReserva(codigo).subscribe(() => {
+    //this.reservas = this.reservas.filter(reserva => reserva.codigo !== codigo);
+    //});
   }
 
+
   toggleVisualizar(reserva: Reserva) {
-    console.log('Reserva expandida atual:', reserva);
-    console.log('Reserva expandida anterior:', this.expandedReserva);
     this.expandedReserva = this.expandedReserva === reserva ? null : reserva;
   }
+
 
 
 }
