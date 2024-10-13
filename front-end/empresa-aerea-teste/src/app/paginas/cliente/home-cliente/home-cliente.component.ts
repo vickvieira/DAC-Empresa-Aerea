@@ -40,8 +40,8 @@ export class HomeClienteComponent implements OnInit {
     this.getMilhasSaldo(this.clienteId);
     this.getReservas(this.clienteId);
     this.fetchReservas();
-
   }
+
   fetchReservas(): void {
     this.http.get<Reserva[]>('http://localhost:3000/reservas').subscribe(reservas => {
       this.reservas = reservas;
