@@ -1,29 +1,32 @@
 <div class="container">
-    <h2>Consultar Reserva</h2>
-       
-    <div class="form-group">
-      <label for="codigoReserva">Código da Reserva:</label>
-      <input type="text" id="codigoReserva" class="form-control" placeholder="Digite o código da reserva">
-    </div>
-    
-  
-    <button class="btn btn-primary" (click)="buscarReserva()">Buscar Reserva</button>
-    
+  <h2>Consultar Reserva</h2>
 
-    <div *@If="reserva">
-      <h3>Detalhes da Reserva</h3>
-      <p>Data/Hora: {{reserva.dataHora}}</p>
-      <p>Código da Reserva: {{reserva.codigo}}</p>
-      <p>Origem: {{reserva.origem}}</p>
-      <p>Destino: {{reserva.destino}}</p>
-      <p>Valor Gasto: R$ {{reserva.valorGasto}}</p>
-      <p>Milhas Gastas: {{reserva.milhasGastas}}</p>
-      <p>Estado: {{reserva.estado}}</p>
-      
-      
-      <button *@If="reserva.proximas48h" class="btn btn-success">Fazer Check-in</button>
-      <button class="btn btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>
-    </div>
-  
+  <div class="form-group">
+    <label for="codigoReserva">Código da Reserva:</label>
+    <input type="text" id="codigoReserva" class="form-control" placeholder="Digite o código da reserva" #codigoReservaInput>
   </div>
-  
+
+  <button class="btn btn-primary" (click)="buscarReserva(codigoReservaInput.value)">Buscar Reserva</button>
+
+  <div *ngIf="reserva">
+    <h3>Detalhes da Reserva</h3>
+    <p>Código da Reserva: {{reserva.codigo}}</p>
+    <p>Data/Hora da Reserva: {{reserva.dataHoraReserva | date:'dd/MM/yyyy HH:mm'}}</p>
+    <p>Status: {{reserva.status}}</p>
+
+    <h4>Detalhes do Voo</h4>
+    <p>Código do Voo: {{reserva.voo.codigo}}</p>
+    <p>Data/Hora do Voo: {{reserva.voo.dataHora | date:'dd/MM/yyyy HH:mm'}}</p>
+    <p>Origem: {{reserva.voo.origem}}</p>
+    <p>Destino: {{reserva.voo.destino}}</p>
+    <p>Valor da Passagem: R$ {{reserva.voo.valorPassagem}}</p>
+    <p>Milhas Necessárias: {{reserva.voo.milhasNecessarias}}</p>
+
+    <h4>Informações de Pagamento</h4>
+    <p>Valor Gasto: R$ {{reserva.valorGasto}}</p>
+    <p>Milhas Utilizadas: {{reserva.milhasUtilizadas}}</p>
+
+    <button *ngIf="reserva.status === 'Aguardando check-in'" class="btn btn-success">Fazer Check-in</button>
+    <button class="btn btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>
+  </div>
+</div>

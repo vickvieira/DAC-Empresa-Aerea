@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-consultar-reserva',
-  standalone: true,
-  imports: [],
   templateUrl: './consultar-reserva.component.html',
-  styleUrl: './consultar-reserva.component.css'
+  styleUrls: ['./consultar-reserva.component.css']
 })
 export class ConsultarReservaComponent {
   reserva: any = null;
+  apiUrl = 'http://localhost:3000/reservas';
 
-  buscarReserva() {
-      this.reserva = {
-      dataHora: '2024-12-12 14:00',
-      codigo: 'ABC123',
-      origem: 'CWB',
-      destino: 'GRU',
-      valorGasto: 500,
-      milhasGastas: 1000,
-      estado: 'Confirmado',
-      proximas48h: true  // Teste
-    };
+  constructor(private http: HttpClient) {}
+
+  buscarReserva(codigo: string) {
+    this.http.get<any[]>(`${this.apiUrl}?codigo=${codigo}`).subscribe(
+      (data) => {
+        this.reserva = data.length ? data[0] : null;
+      },
+      (error) => {
+        console.error('Erro ao buscar reserva', error);
+      }
+    );
   }
- 
-  cancelarReserva() {
-    console.log("Só para não dar erro na func");
+
+  cancelarReserva(codigo: string) {
+    //testar delete da api
+    console.log('Reserva cancelada');
   }
 }

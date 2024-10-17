@@ -1,21 +1,33 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro-voo',
-  standalone: true,
-  imports: [],
   templateUrl: './cadastro-voo.component.html',
-  styleUrl: './cadastro-voo.component.css'
+  styleUrls: ['./cadastro-voo.component.css']
 })
 export class CadastroVooComponent {
-  valorPassagem: number = 0;
+  apiUrl = 'http://localhost:3000/voos';
 
-  calcularMilhas(valor: number): number {
-    return valor / 5; // Regra de conversão: 1 milha a cada R$5.00
-  }
+  novoVoo = {
+    codigo: '',
+    dataHora: '',
+    origem: '',
+    destino: '',
+    valorPassagem: 0,
+    milhasNecessarias: 0
+  };
+
+  constructor(private http: HttpClient) {}
 
   cadastrarVoo() {
-    console.log("Falta coisa");
+    this.http.post(this.apiUrl, this.novoVoo).subscribe(
+      (response) => {
+        console.log('Voo cadastrado com sucesso', response);
+      },
+      (error) => {
+        console.error('Erro ao cadastrar voo', error);
+      }
+    );
   }
 }
-
